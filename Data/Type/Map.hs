@@ -22,10 +22,9 @@ import Control.Precondition
 import           Data.Array as A hiding (indices,assocs,(!))
 import qualified Data.Array as A 
 import Data.Bifoldable
--- import Data.Bifunctor
 import Data.Bitraversable
 import Data.Bytes.Serial hiding (store)
-import Data.Coerce
+import Data.Coerce as C
 import Data.Constraint
 import Data.DList as D
 import Data.Foldable as F
@@ -52,7 +51,7 @@ import Text.Pretty
 
 import Unsafe.Coerce
 
-import Utilities.Functor
+-- import Utilities.Functor
 
 newtype Subset k0 k1 = Subset (k0 -> k1)
 
@@ -409,7 +408,7 @@ data Reflected s
 unsafeFMapCoerce :: (Functor t,Functor t'
                     ,Coercible a b,Coercible a' b') 
                  => Iso (t a) (t' a') (t b) (t' b')
-unsafeFMapCoerce = iso unsafeCoerce unsafeCoerce `sameTypeAs` mapping coerced
+unsafeFMapCoerce = iso unsafeCoerce unsafeCoerce `sameTypeAs` mapping coerced'
 
 unsafeBimapCoerce :: (Bifunctor t
                      ,Bifunctor t'
@@ -418,10 +417,13 @@ unsafeBimapCoerce :: (Bifunctor t
                      ,Coercible c c'
                      ,Coercible d d') 
                   => Iso (t a b) (t' c d) (t a' b') (t' c' d')
-unsafeBimapCoerce = iso unsafeCoerce unsafeCoerce `sameTypeAs` bimapping coerced coerced
+unsafeBimapCoerce = iso unsafeCoerce unsafeCoerce `sameTypeAs` bimapping coerced' coerced'
 
 sameTypeAs :: a -> a -> a
 sameTypeAs x _ = x
+
+coerced' :: (Coercible s a, Coercible t b) => Iso s t a b
+coerced' = iso C.coerce C.coerce
 
 newtype RIndex s k = RIndex { getRIndex :: k }
     deriving (Eq,Ord,Functor,Foldable,Traversable,Generic)
@@ -430,12 +432,14 @@ instance NFData k => NFData (RIndex s k) where
 
 instance Serial k => Serial (RIndex s k) where
 
+newtype Swap f a b = Swap { unSwap :: f b a } 
+
 instance (IsKey k,Reifies s (Table k a),PrettyPrintable a) 
         => PrettyPrintable (RIndex (Reflected s) k) where
-    pretty k@(RIndex x) = pretty $ at (reflect $ Compose $ Swap1 k) x
+    pretty k@(RIndex x) = pretty $ at (reflect $ Compose $ Swap k) x
 
 instance (IsKey k,Reifies s (Table k a),Show a) => Show (RIndex (Reflected s) k) where
-    show k@(RIndex x) = show $ at (reflect $ Compose $ Swap1 k) x
+    show k@(RIndex x) = show $ at (reflect $ Compose $ Swap k) x
 
 instance Arbitrary k => Arbitrary (RIndex s k) where
     arbitrary = RIndex <$> arbitrary
@@ -465,7 +469,7 @@ instance Wrapped (Table (RIndex s k) a) where
 class IsKey k => HasValue a k | k -> a where
     value :: k -> a
 instance (IsKey k,Reifies s (Table k a)) => HasValue a (RIndex (Reflected s) k) where
-    value x@(RIndex k) = at (reflect $ Compose $ Swap1 x) k
+    value x@(RIndex k) = at (reflect $ Compose $ Swap x) k
 
 toArrayMapping :: IsKey k 
                => Table k a 
