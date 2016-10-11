@@ -529,7 +529,7 @@ withNum :: Int -> (forall n. SingI n => SNat n -> r) -> r
 withNum n f = withSomeSing (intToNat n) $ \n' -> withSingI n' (f n')
 -- withNum n f = withSingI (f n)
 -- withNum n f | n <= 0 = f sZero
-            -- | otherwise = withNum (n-1) _
+--             | otherwise = withNum (n-1) _
 
 -- firstEntry :: IsKey k => Table k a -> Maybe k
 -- firstEntry _ = indices
