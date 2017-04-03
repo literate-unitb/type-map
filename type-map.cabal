@@ -19,7 +19,7 @@ synopsis:            Data structures for total functions using dependent types
 description:         Data structures for total functions using dependent types
 
 -- URL for the project homepage or repository.
-homepage:            https://github.com/literate-unitb/literate-unitb/wiki
+homepage:            https://github.com/unitb/unitb/wiki
 
 -- The license under which the package is released.
 license:             MIT
@@ -50,7 +50,7 @@ cabal-version:       >=1.10
 
 source-repository head
   type:     git
-  location: https://github.com/literate-unitb/type-map
+  location: https://github.com/unitb/type-map
 
 library
   -- Modules exported by the library.
@@ -63,7 +63,7 @@ library
   default-extensions:    TypeFamilies, RankNTypes, TupleSections, FlexibleContexts, FlexibleInstances, DeriveFunctor, DeriveFoldable, ConstraintKinds, QuasiQuotes, MultiParamTypeClasses, DeriveGeneric, TypeOperators, DataKinds, ScopedTypeVariables, DeriveTraversable, StandaloneDeriving, FunctionalDependencies
   
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.7 && <4.9, bound >=1.0 && <3, deepseq >=1.4 && <1.5, lens >=4.12 && <4.15, mtl >=2.2 && <2.3, array >=0.5 && <0.6, bifunctors >=5 && <6, bytes >=0.15 && <0.16, constraints >=0.4 && <0.9, dlist >=0.7 && <0.8, transformers >=0.4 && <0.5, containers >=0.5 && <0.6, tagged >=0.8 && <0.9, reflection >=2 && <2.2, type-natural >=0.3 && <0.5, QuickCheck >=2.8 && <2.9, pretty-printable, axiomatic-classes, invariants
+  build-depends:       base >=4.7 && <5, bound >=1.0 && <3, deepseq >=1.4 && <1.5, lens >=4.12 && <4.16, mtl >=2.2 && <2.3, array >=0.5 && <0.6, bifunctors >=5 && <6, bytes >=0.15 && <0.16, constraints >=0.4 && <0.9, dlist >=0.7 && <0.8, transformers >=0.4 && <0.6, containers >=0.5 && <0.6, tagged >=0.8 && <0.9, reflection >=2 && <2.2, type-natural >=0.3 && <0.5, QuickCheck >=2.8 && <2.10, pretty-printable, axiomatic-classes, invariants
   
   -- Directories containing source files.
   hs-source-dirs:      .
