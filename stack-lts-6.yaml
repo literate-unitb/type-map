@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-8.21
+resolver: lts-6.35
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -53,24 +53,24 @@ packages:
 extra-deps: 
 - equational-reasoning-0.4.1.1
 - ghc-typelits-presburger-0.1.1.0
-# # - singletons-2.1
+- singletons-2.1
 - type-natural-0.4.1.1
 
 - constraints-0.8
-- lens-4.14
+# - lens-4.14
 # - type-natural-0.4.2.0
 # - comonad-4.3
 
 - monomorphic-0.0.3.3
-# # - th-desugar-1.6
+- th-desugar-1.6
 - assert-0.0.1.2
 - portable-lines-0.1
 - ghc-typelits-natnormalise-0.4.6
 # # - ghc-tcplugins-extra-0.2
 # # - binary-0.7.6.1
 - dlist-0.7.1.2
-# - bound-1.0.7
-- bound-2
+- bound-1.0.7
+# - bound-2
 # # - transformers-compat-0.4.0.4
 - th-printf-0.3.1
 - quickcheck-report-0.1.0.0

@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-8.21
+resolver: lts-7.24
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -57,7 +57,7 @@ extra-deps:
 - type-natural-0.4.1.1
 
 - constraints-0.8
-- lens-4.14
+# - lens-4.14
 # - type-natural-0.4.2.0
 # - comonad-4.3
 
@@ -67,11 +67,12 @@ extra-deps:
 - portable-lines-0.1
 - ghc-typelits-natnormalise-0.4.6
 # # - ghc-tcplugins-extra-0.2
-# # - binary-0.7.6.1
+- binary-0.7.6.1
 - dlist-0.7.1.2
 # - bound-1.0.7
 - bound-2
-# # - transformers-compat-0.4.0.4
+# - transformers-0.4.3.0
+# - transformers-compat-0.4.0.4
 - th-printf-0.3.1
 - quickcheck-report-0.1.0.0
 - portable-template-haskell-lens-0.1.0.0
@@ -79,6 +80,7 @@ extra-deps:
 - control-invariants-0.1.0.0
 - existential-0.2.0.0
 - axiomatic-classes-0.1.0.0
+- hashable-1.2.6.1
 # - hashable-extras-0.2.3
 
 # Override default flag values for local packages and extra-deps
